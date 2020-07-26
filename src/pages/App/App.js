@@ -5,6 +5,7 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import HomePage from '../HomePage/HomePage';
 import userService from '../../utils/userService';
+import { getQOD } from '../../utils/quote';
 
 
 
@@ -26,9 +27,18 @@ export default class App extends Component {
     this.setState({user: userService.getUser()});
   }
 
+  async componentDidMount() {
+    const quote = await getQOD('inspire');
+    this.setState({
+      quote: quote.contents.quotes[0].quote,
+      quoteAuth: quote.contents.quotes[0].author
+    });
+  }
+
   render() {
     return (
       <div className="App">
+        {this.state.quote} - {this.state.quoteAuth}
         <Switch>
           <Route exact path ='/' render={() => 
             <HomePage

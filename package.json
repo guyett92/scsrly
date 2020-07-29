@@ -16,6 +16,7 @@
     "morgan": "^1.10.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-helmet-async": "^1.0.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "serve-favicon": "^2.5.0"
@@ -41,5 +42,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy":"https://success-snake.herokuapp.com"
+  "proxy": "http://localhost:3001"
 }

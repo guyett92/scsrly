@@ -15,7 +15,7 @@ Coming soon!
 * HTML
 * Javascript
 * JSON Web Token (JWT)
-* Node Packages: serve-favicon, morgan, mongoose, dotenv, bcrypt, react-router-dom
+* Node Packages: serve-favicon, morgan, mongoose, dotenv, bcrypt, react-router-dom, react-helmet-async
 ## APIs Integrated
 * [They Said So](https://quotes.rest) - Quotes API
 * Coming Soon!
@@ -27,7 +27,7 @@ Coming soon!
 ## Planning
 * [Trello Board](https://trello.com/b/3Zyw3cIf/success-platform)
 * [Wireframes](https://balsamiq.cloud/sah357c/pmggzzy)
-* ![Entity Relationship Diagram](./public/img/SuccessTracker.svg)
+![Entity Relationship Diagram](./public/img/SuccessTracker.svg)
 ## Future Goals
 * Integrate other social media services - ex. Share to LinkedIn
 * Job currency

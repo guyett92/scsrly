@@ -1,12 +1,19 @@
 import React from 'react';
-import Navbar from '../../components/Navbar/Navbar';
+import Layout from '../../components/Layout/Layout';
 
 
 const HomePage = (props) => {
     return (
-        <div>
-            <Navbar user={props.user} handleLogout={props.handleLogout} />
-        </div>
+        <Layout
+            title={props.title}
+            pageTitle="Home"
+            keywords="aaron, guyett, success, snake"
+            user={props.user}
+            handleLogout={props.handleLogout}
+            quote={props.quote}
+            quoteAuth={props.quoteAuth}
+        >
+        </Layout>
     )
 }
 

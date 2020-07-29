@@ -1,0 +1,39 @@
+.quote {
+    color: white;
+    float: right;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.right {
+    margin-left: auto !important;
+}
+
+.image {
+    width: 8rem;
+    padding: 0.25rem;
+    border-radius: 5%;
+    background-color: #fff;
+    margin: 0 1.5rem 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.image img {
+    width: 3rem;
+    margin: 0 auto !important;
+}
+
+.image caption {
+    font-family: 'Noto Sans JP';
+    font-weight: bold;
+}
+
+.image caption span {
+    text-decoration: line-through;
+}
+
+.unlink {
+    text-decoration: none;
+    color: black;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/Layout/Layout';
 
 
+
 const HomePage = (props) => {
     return (
         <Layout
@@ -12,6 +13,9 @@ const HomePage = (props) => {
             handleLogout={props.handleLogout}
             quote={props.quote}
             quoteAuth={props.quoteAuth}
+            open={props.open}
+            onOpen={props.onOpen}
+            onClose={props.onClose}
         >
         </Layout>
     )

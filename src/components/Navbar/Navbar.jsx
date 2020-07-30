@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, IconButton, Avatar, Paper, Divider, InputBase, Button } from '@material-ui/core';
-import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import {
+   AppBar,
+   Toolbar,
+   IconButton,
+   Avatar,
+   Paper,
+   Divider,
+   InputBase,
+   Button,
+   Hidden,
+   withStyles
+   } from '@material-ui/core';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles } from '@material-ui/core/styles';
 import './Navbar.css';
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
   root: {
     padding: '2px 4px',
     display: 'flex',
@@ -27,29 +36,27 @@ const useStyles = makeStyles((theme) => ({
     height: 28,
     margin: 4,
   },
-}));
+});
 
 
-export default function(props) {
-
-  const classes = useStyles();
+class Navbar extends Component {
+  render() {
   return (
     <AppBar position="static">
       <Toolbar>
         <Link className="unlink">
         <figure className="image">
           <img src="/img/favicon.ico" alt="logo" />
-          <caption><span>Success Snake</span> ✔️</caption>
         </figure>
         </Link>
-        {props.user ? 
+        {this.props.user ? 
               <>
                 <IconButton>
-                  <ExitToAppRoundedIcon onClick={props.handleLogout}/>
+                  <ExitToAppRoundedIcon onClick={this.props.handleLogout}/>
                 </IconButton>
                 <IconButton>
-                  {props.user.avatarUrl ?
-                    <Avatar alt={props.user.name} src={props.user.avatarUrl} />
+                  {this.props.user.avatarUrl ?
+                    <Avatar alt={this.props.user.name} src={this.props.user.avatarUrl} />
                   :
                     <AccountCircleRoundedIcon />
                   }
@@ -59,28 +66,32 @@ export default function(props) {
             :
             <div>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <Button><Link to="/login">LOG IN</Link></Button>
+              <Button><Link to="/login" className="login">LOG IN</Link></Button>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <Button><Link to="/signup">SIGN UP</Link></Button>
+              <Button><Link to="/signup" className="login">SIGN UP</Link></Button>
               &nbsp;&nbsp;&nbsp;&nbsp;
             </div>
         }
-                <Paper component="form" className={classes.root}>
-        <InputBase
-          className={classes.input}
-          placeholder="Search..."
-          inputProps={{ 'aria-label': 'Search' }}
-        />
-        <Divider className={classes.divider} orientation="vertical" />
-        <IconButton type="submit" color="secondary" className={classes.iconButton} aria-label="search">
-          <SearchIcon />
-        </IconButton>
-      </Paper>
-        <IconButton className='right' edge="end" aria-label="menu">
-          <MenuIcon />
-        </IconButton>
+        <Paper component="form" className={this.props.classes.root}>
+          <InputBase
+            className={this.props.classes.input}
+            placeholder="Search..."
+            inputProps={{ 'aria-label': 'Search' }}
+          />
+          <Divider className={this.props.classes.divider} orientation="vertical" />
+          <IconButton type="submit" color="secondary" className={this.props.classes.iconButton} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+        </Paper>
+        <Hidden lgUp>
+          <IconButton onClick={this.props.onSidebarOpen} className='right' edge="end" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
       </Toolbar>
     </AppBar>
   )
+  }
 }
 
+export default withStyles(styles)(Navbar);

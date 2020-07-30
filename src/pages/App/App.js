@@ -9,16 +9,14 @@ import { getQOD } from '../../utils/quote';
 import theme from '../theme';
 import { ThemeProvider } from '@material-ui/core/styles';
 
-
-
-
 export default class App extends Component {
 
   constructor() {
     super();
     this.state = {
       user: userService.getUser(),
-      title: "Success Snake"
+      title: "Success Snake",
+      openSidebar: false
     };
   }
 
@@ -30,6 +28,14 @@ export default class App extends Component {
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()});
   }
+
+  handleSidebarOpen = () => {
+    this.setState({ openSidebar: true });
+  };
+
+  handleSidebarClose = () => {
+    this.setState({ openSidebar: false });
+  };
 
   async componentDidMount() {
     const quote = await getQOD('inspire');
@@ -50,6 +56,9 @@ export default class App extends Component {
                 title={this.state.title}
                 quote={this.state.quote}
                 quoteAuth={this.state.quoteAuth}
+                open={this.state.openSidebar}
+                onOpen={this.handleSidebarOpen}
+                onClose={this.handleSidebarClose}
               />
             }/>
             <Route exact path='/signup' render={ (props) =>

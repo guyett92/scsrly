@@ -14,8 +14,10 @@ export default function Layout(props) {
                 handleLogout={props.handleLogout}
                 quote={props.quote}
                 quoteAuth={props.quoteAuth}
+                open={props.open}
+                onOpen={props.onOpen}
+                onClose={props.onClose}
             />
-            <Footer />
         </Fragment>
     )
 }

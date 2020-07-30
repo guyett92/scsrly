@@ -11,11 +11,14 @@ export default function Header(props) {
                 onSidebarOpen={props.onOpen} 
             />
             <Sidebar
+            user={props.user}
             open={props.open}
             onOpen={props.onOpen}
             onClose={props.onClose}
+            handleLogout={props.handleLogout}
+            quote={props.quote}
+            quoteAuth={props.quoteAuth}
             />
-            {props.quote} - {props.quoteAuth}
         </div>
     )
 }

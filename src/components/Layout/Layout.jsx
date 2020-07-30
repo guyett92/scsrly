@@ -9,6 +9,7 @@ import './Layout.css';
 export default function Layout(props) {
     return (
         <Fragment>
+            <Head {...props} />
             <Header 
                 user={props.user}
                 handleLogout={props.handleLogout}
@@ -18,6 +19,7 @@ export default function Layout(props) {
                 onOpen={props.onOpen}
                 onClose={props.onClose}
             />
+            <Footer />
         </Fragment>
     )
 }

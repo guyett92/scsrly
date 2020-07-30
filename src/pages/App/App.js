@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import HomePage from '../HomePage/HomePage';
+import UserPage from '../UserPage/UserPage';
 import userService from '../../utils/userService';
 import { getQOD } from '../../utils/quote';
 import theme from '../theme';
@@ -80,6 +81,22 @@ export default class App extends Component {
                 quote={this.state.quote}
                 quoteAuth={this.state.quoteAuth}
               />
+            }/>
+            <Route exact path='/user' render={ (props) =>
+              userService.getUser() ?
+                <UserPage
+                  history={props.history}
+                  user={this.state.user}
+                  handleLogout={this.handleLogout}
+                  title={this.state.title}
+                  quote={this.state.quote}
+                  quoteAuth={this.state.quoteAuth}
+                  open={this.state.openSidebar}
+                  onOpen={this.handleSidebarOpen}
+                  onClose={this.handleSidebarClose}
+                />
+                :
+                <Redirect to='/login' />
             }/>
           </Switch>
       </ThemeProvider>

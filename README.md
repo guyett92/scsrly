@@ -15,7 +15,7 @@ Coming soon!
 * HTML
 * Javascript
 * JSON Web Token (JWT)
-* Node Packages: serve-favicon, morgan, mongoose, dotenv, bcrypt, react-router-dom, react-helmet-async
+* Node Packages: serve-favicon, morgan, mongoose, dotenv, bcrypt, react-router-dom, react-helmet
 ## APIs Integrated
 * [They Said So](https://quotes.rest) - Quotes API
 * Coming Soon!
@@ -23,7 +23,8 @@ Coming soon!
 * Users can create an account.
 * Users can login or logout.
 * Users can see a motivational quote.
-* Many more coming soon!
+* Users can view an account page.
+* Users can be frustrated by features that look implemented but do not yet function (ex. search).
 ## Planning
 * [Trello Board](https://trello.com/b/3Zyw3cIf/success-platform)
 * [Wireframes](https://balsamiq.cloud/sah357c/pmggzzy)

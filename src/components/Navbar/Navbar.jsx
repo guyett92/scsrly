@@ -38,59 +38,59 @@ const styles = theme => ({
   },
 });
 
-
 class Navbar extends Component {
+
   render() {
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <Link className="unlink">
-        <figure className="image">
-          <img src="/img/favicon.ico" alt="logo" />
-        </figure>
-        </Link>
-        {this.props.user ? 
-              <>
-                <IconButton>
-                  <ExitToAppRoundedIcon onClick={this.props.handleLogout}/>
-                </IconButton>
-                <IconButton>
-                  {this.props.user.avatarUrl ?
-                    <Avatar alt={this.props.user.name} src={this.props.user.avatarUrl} />
-                  :
-                    <AccountCircleRoundedIcon />
-                  }
-                </IconButton>
+    return (
+      <AppBar position="static">
+        <Toolbar>
+          <Link className="unlink" to="/">
+            <figure className="image">
+              <img src="/img/favicon.ico" alt="logo" />
+            </figure>
+          </Link>
+          {this.props.user ? 
+                <>
+                  <IconButton>
+                    <ExitToAppRoundedIcon onClick={this.props.handleLogout}/>
+                  </IconButton>
+                  <Link to="/user">
+                    <IconButton>
+                      {this.props.user.avatarUrl ?
+                        <Avatar alt={this.props.user.name} src={this.props.user.avatarUrl} />
+                      :
+                        <AccountCircleRoundedIcon />
+                      }
+                    </IconButton>
+                  </Link>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                </>
+              :
+              <Hidden smDown>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-              </>
-            :
-            <div>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <Button><Link to="/login" className="login">LOG IN</Link></Button>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <Button><Link to="/signup" className="login">SIGN UP</Link></Button>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-            </div>
-        }
-        <Paper component="form" className={this.props.classes.root}>
-          <InputBase
-            className={this.props.classes.input}
-            placeholder="Search..."
-            inputProps={{ 'aria-label': 'Search' }}
-          />
-          <Divider className={this.props.classes.divider} orientation="vertical" />
-          <IconButton type="submit" color="secondary" className={this.props.classes.iconButton} aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        </Paper>
-        <Hidden lgUp>
-          <IconButton onClick={this.props.onSidebarOpen} className='right' edge="end" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-        </Hidden>
-      </Toolbar>
-    </AppBar>
-  )
+                <Button aria-label="login"><Link to="/login" className="login">LOG IN</Link></Button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Button aria-label="sign up"><Link to="/signup" className="login">SIGN UP</Link></Button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+              </Hidden>
+          }
+          <Paper component="form" className={this.props.classes.root}>
+            <InputBase
+              className={this.props.classes.input}
+              placeholder="Search..."
+              inputProps={{ 'aria-label': 'Search' }}
+            />
+            <Divider className={this.props.classes.divider} orientation="vertical" />
+            <IconButton type="submit" color="secondary" className={this.props.classes.iconButton} aria-label="search">
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+            <IconButton onClick={this.props.onSidebarOpen} className='right' edge="end" aria-label="menu">
+              <MenuIcon />
+            </IconButton>
+        </Toolbar>
+      </AppBar>
+    )
   }
 }
 

@@ -1,13 +1,20 @@
 import React, { Component } from "react";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import { withStyles } from "@material-ui/core";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import { Link } from 'react-router-dom';
+import { 
+  withStyles,
+  ListItemAvatar,
+  List,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Avatar,
+  SwipeableDrawer
+  } from "@material-ui/core";
+import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded"
+import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
+import AssignmentTurnedInRoundedIcon from '@material-ui/icons/AssignmentTurnedInRounded';
+import './Sidebar.css';
 
 const styles = {
   fullList: {
@@ -36,12 +43,9 @@ class Sidebar extends Component {
     this.setState({ openSidebar: true });
   };
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log("Sidebar state: " + this.state.openSidebar);
-  }
 
   fullList = () => {
-    const { classes, onClose } = this.props;
+    const { classes, onClose, user, handleLogout, quote, quoteAuth} = this.props;
     return (
       <div
         className={classes.fullList}
@@ -50,25 +54,64 @@ class Sidebar extends Component {
         onKeyDown={onClose}
       >
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          {user ?
+            <>
+              <ListItem button key="Avatar" aria-label="avatar" >
+                <ListItemAvatar>
+                  <Avatar alt={user.name} src={
+                    user.avatarURL ?
+                    user.avatarURL
+                    :
+                    ""
+                  } />
+                </ListItemAvatar>
+                <ListItemText>
+                  Hi there, {user.name.split(' ')[0]}!
+                </ListItemText>
+              </ListItem>
+              <ListItem button key="Log Out" aria-label="logout" onClick={handleLogout}>
+                <ListItemIcon>
+                  <ExitToAppRoundedIcon />
+                </ListItemIcon>
+                <ListItemText>
+                  Log Out
+                </ListItemText>
+              </ListItem>
+            </>
+            :
+            <Link to="/login" className="login">
+              <ListItem button key="Log In" aria-label="login">
+                <ListItemIcon>
+                  <AccountCircleRoundedIcon />
+                </ListItemIcon>
+                <ListItemText>
+                  Log In
+                </ListItemText>
+              </ListItem>
+            </Link>
+          }
+          <Divider />
+          <ListItem>
+            <ListItemText>
+              {quote} {
+                quoteAuth ?
+                `- ${quoteAuth}`
+                :
+                "- Anonymous"
+              }
+            </ListItemText>
+          </ListItem>
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key="Goals" aria-label="goals">
+            <ListItemIcon>
+              <AssignmentTurnedInRoundedIcon />
+            </ListItemIcon>
+            <ListItemText>
+              Goals
+            </ListItemText>
+          </ListItem>
         </List>
       </div>
     );
@@ -87,7 +130,6 @@ class Sidebar extends Component {
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
       >
-        {console.log(onClose)}
         {this.fullList()}
       </SwipeableDrawer>
     );

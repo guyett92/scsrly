@@ -16,7 +16,7 @@ export default class App extends Component {
     super();
     this.state = {
       user: userService.getUser(),
-      title: "Success Snake",
+      title: "Scsr.ly",
       openSidebar: false
     };
   }

@@ -12,7 +12,6 @@ import {
    Hidden,
    withStyles
    } from '@material-ui/core';
-import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -46,20 +45,19 @@ class Navbar extends Component {
         <Toolbar>
           <Link className="unlink" to="/">
             <figure className="image">
-              <img src="/img/favicon.ico" alt="logo" />
+              <img src="/img/logo.jpg" alt="logo" />
             </figure>
           </Link>
+          <Link className="unlink" to="/">Scsr.ly</Link>
           {this.props.user ? 
                 <>
-                  <IconButton>
-                    <ExitToAppRoundedIcon onClick={this.props.handleLogout}/>
-                  </IconButton>
+                  <Button onClick={this.props.handleLogout} className="login white" style={{marginLeft: "1.25rem"}}aria-label="login">LOG OUT</Button>
                   <Link to="/user">
                     <IconButton>
                       {this.props.user.avatarUrl ?
                         <Avatar alt={this.props.user.name} src={this.props.user.avatarUrl} />
                       :
-                        <AccountCircleRoundedIcon />
+                        <AccountCircleRoundedIcon style={{color: 'white'}}/>
                       }
                     </IconButton>
                   </Link>
@@ -68,9 +66,9 @@ class Navbar extends Component {
               :
               <Hidden smDown>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <Button aria-label="login"><Link to="/login" className="login">LOG IN</Link></Button>
+                <Button aria-label="login"><Link to="/login" className="login white">LOG IN</Link></Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <Button aria-label="sign up"><Link to="/signup" className="login">SIGN UP</Link></Button>
+                <Button aria-label="sign up"><Link to="/signup" className="login white">SIGN UP</Link></Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
               </Hidden>
           }
@@ -86,7 +84,7 @@ class Navbar extends Component {
             </IconButton>
           </Paper>
             <IconButton onClick={this.props.onSidebarOpen} className='right' edge="end" aria-label="menu">
-              <MenuIcon />
+              <MenuIcon style={{color: "white"}} />
             </IconButton>
         </Toolbar>
       </AppBar>

@@ -1,11 +1,11 @@
-# Success Snake v0.25
-[Success Snake](https://success-snake.herokuapp.com) is a social media app that utilizes the MERN stack and is hosted on Heroku.
+# Scsr.ly v0.25
+[Scsr.ly ](https://success-snake.herokuapp.com) is a social media app that utilizes the MERN stack and is hosted on Heroku.
 ## Features
 Users can create an account to share their goals with others. A goal is broken down into tasks and users can give kudos to others when a task is completed or shared. The application helps track goals and utilizes an API to display motivational quotes while connecting others with like-minded people.
 ## Images
 Coming soon!
 ## Getting Started
-* Sign Up at [Success Snake](https://success-snake.herokuapp.com)
+* Sign Up at [Scsr.ly ](https://success-snake.herokuapp.com)
 ## Technologies Used
 * React
 * Express

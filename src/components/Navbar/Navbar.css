@@ -1,37 +1,34 @@
-.quote {
-    color: white;
-    float: right;
-    font-size: 0.95rem;
-    text-align: center;
-}
-
 .right {
     margin-left: auto !important;
 }
 
 .image {
     width: 4rem;
-    padding: 0.25rem;
     border-radius: 5%;
     background-color: #fff;
     margin: 0 1rem 0 0;
     display: flex;
     align-items: center;
+    padding: 0;
 }
 
 .login {
     text-decoration: none;
-    color: #000;
     font-family: 'Noto Sans JP';
     font-weight: 700;
 }
 
+.white {
+    color: #fff !important;
+}
+
 .image img {
-    width: 3rem;
+    width: 100%;
+    padding: 0;
     margin: 0 auto !important;
 }
 
 .unlink {
     text-decoration: none;
-    color: black;
+    color:#fff !important;
 }

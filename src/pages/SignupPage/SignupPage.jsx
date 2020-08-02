@@ -31,20 +31,16 @@
 
 import React, { Component } from 'react';
 import {
-  Avatar,
-  Button,
   CssBaseline,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  Grid,
-  Box,
-  Typography,
-  Container
+  Snackbar,
+  Container,
+  IconButton
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { withStyles } from '@material-ui/core/styles';
+import Head from '../../components/Head/Head';
+import Header from '../../components/Header/Header';
+import SignUpForm from '../../components/SignupForm/SignupForm';
+import CloseIcon from '@material-ui/icons/Close';
 
 const styles =theme => ({
   paper: {
@@ -68,102 +64,64 @@ const styles =theme => ({
 
 class SignupPage extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {message: ''}
+    this.state.open = false;
+  }
+
+  updateMessage = (msg) => {
+    this.setState({message: msg, open: true});
+  }
+
+  handleClose = (e, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({open: false});
+  }
+
   render() {
 
     return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={this.props.classes.paper}>
-          <Avatar className={this.props.classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <form className={this.props.classes.form} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={this.props.classes.submit}
-            >
-              Sign Up
-            </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={5}>
-          <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-              Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-          </Typography>
-        </Box>
-      </Container>
+      <>
+        <Header 
+            user={this.props.user}
+            handleLogout={this.props.handleLogout}
+            quote={this.props.quote}
+            quoteAuth={this.props.quoteAuth}
+            open={this.props.open}
+            onOpen={this.props.onOpen}
+            onClose={this.props.onClose}
+        />
+        <Container component="main" maxWidth="xs">
+          <Head 
+            title={this.props.title}
+            pageTitle='Sign Up'
+          />
+          <CssBaseline />
+          <SignUpForm {...this.props} updateMessage={this.updateMessage} />
+          {this.state.message &&
+            <Snackbar
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left'
+              }}
+              open={this.state.open}
+              autoHideDuration={6000}
+              onClose={this.handleClose}
+              message={this.state.message}
+              action={
+                <React.Fragment>
+                  <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleClose}>
+                    <CloseIcon fontSize="small" />
+                  </IconButton>
+                </React.Fragment>
+              }
+            />
+          }
+        </Container>
+      </>
     );
   }
 }

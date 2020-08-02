@@ -5,6 +5,8 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import HomePage from '../HomePage/HomePage';
 import UserPage from '../UserPage/UserPage';
+import GoalsPage from '../GoalsPage/GoalsPage';
+import AddGoalPage from '../AddGoalPage/AddGoalPage';
 import userService from '../../utils/userService';
 import { getQOD } from '../../utils/quote';
 import theme from '../theme';
@@ -48,7 +50,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <ThemeProvider theme={theme} className="App">
+      <ThemeProvider theme={theme}>
           <Switch>
             <Route exact path ='/' render={() => 
               <HomePage
@@ -63,24 +65,40 @@ export default class App extends Component {
               />
             }/>
             <Route exact path='/signup' render={ (props) =>
-              <SignupPage
-                {...props}
-                history={props.history}
-                handleSignupOrLogin={this.handleSignupOrLogin}
-                title={this.state.title}
-                quote={this.state.quote}
-                quoteAuth={this.state.quoteAuth}
-              />
+              userService.getUser() ?
+                <Redirect to='/' />
+              :
+                <SignupPage
+                  {...props}
+                  history={props.history}
+                  handleSignupOrLogin={this.handleSignupOrLogin}
+                  title={this.state.title}
+                  quote={this.state.quote}
+                  quoteAuth={this.state.quoteAuth}
+                  user={this.state.user}
+                  open={this.state.openSidebar}
+                  handleLogout={this.handleLogout}
+                  onOpen={this.handleSidebarOpen}
+                  onClose={this.handleSidebarClose}
+                />
             }/>
             <Route exact path='/login' render={ (props) => 
-              <LoginPage
-                {...props}
-                history={props.history}
-                handleSignupOrLogin={this.handleSignupOrLogin}
-                title={this.state.title}
-                quote={this.state.quote}
-                quoteAuth={this.state.quoteAuth}
-              />
+              userService.getUser() ?
+                <Redirect to='/' />
+              :
+                <LoginPage
+                  {...props}
+                  history={props.history}
+                  handleSignupOrLogin={this.handleSignupOrLogin}
+                  title={this.state.title}
+                  quote={this.state.quote}
+                  quoteAuth={this.state.quoteAuth}
+                  user={this.state.user}
+                  open={this.state.openSidebar}
+                  handleLogout={this.handleLogout}
+                  onOpen={this.handleSidebarOpen}
+                  onClose={this.handleSidebarClose}
+                />
             }/>
             <Route exact path='/user' render={ (props) =>
               userService.getUser() ?
@@ -96,6 +114,35 @@ export default class App extends Component {
                   onClose={this.handleSidebarClose}
                 />
                 :
+                <Redirect to='/login' />
+            }/>
+            <Route exact path='/goals' render={ (props) =>
+              <GoalsPage
+                history={props.history}
+                user={this.state.user}
+                handleLogout={this.handleLogout}
+                title={this.state.title}
+                quote={this.state.quote}
+                quoteAuth={this.state.quoteAuth}
+                open={this.state.openSidebar}
+                onOpen={this.handleSidebarOpen}
+                onClose={this.handleSidebarClose}
+              />
+            }/>
+            <Route exact path='/addgoal' render={ (props) =>
+              userService.getUser() ?
+                <AddGoalPage
+                  history={props.history}
+                  user={this.state.user}
+                  handleLogout={this.handleLogout}
+                  title={this.state.title}
+                  quote={this.state.quote}
+                  quoteAuth={this.state.quoteAuth}
+                  open={this.state.openSidebar}
+                  onOpen={this.handleSidebarOpen}
+                  onClose={this.handleSidebarClose}
+                />
+              :
                 <Redirect to='/login' />
             }/>
           </Switch>

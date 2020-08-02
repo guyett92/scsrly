@@ -8,14 +8,18 @@ import {
   Checkbox,
   Link,
   Grid,
-  Box,
   Typography,
   Container,
+  Snackbar,
+  IconButton,
   withStyles
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import CloseIcon from '@material-ui/icons/Close';
 import userService from '../../utils/userService';
 import Head from '../../components/Head/Head';
+import Header from '../../components/Header/Header';
+import FormCopyright from '../../components/FormCopyRight/FormCopyRight';
 import './LoginPage.css';
 
 const styles = theme => ({
@@ -45,14 +49,36 @@ class LoginPage extends Component {
 
     state = {
       email: '',
-      pw: ''
+      pw: '',
+      message: '',
+      open: false
     };
+
+    updateMessage = (msg) => {
+      this.setState({message: msg, open: true});
+    }
+
+    handleClose = (e, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      this.setState({open: false});
+    }  
 
     handleChange = (e) => {
       // TODO: implement in an elegant way
+      this.updateMessage('');
       this.setState({
         // Using ES2015 Computed Property Names
         [e.target.name]: e.target.value
+      });
+    }
+
+    handleClick = (e) => {
+      this.updateMessage('We always remember you!');
+      this.setState({
+        remember: e.target.checked,
+        open: true
       });
     }
 
@@ -60,104 +86,133 @@ class LoginPage extends Component {
       e.preventDefault();
       try {
         await userService.login(this.state);
-        // Successfully signed up - show GamePage
         this.props.handleSignupOrLogin();
         this.props.history.push('/');
       } catch (err) {
-        console.log(err);
+        
         // Invalid user data (probably duplicate email)
       }
     }
 
+    isFormInvalid() {
+      return !(this.state.email && this.state.pw);
+    }
+
   render() {
     return (
-      <Container component="main" maxWidth="xs">
-        <Head 
-          title={this.props.title}
-          pageTitle='Login'
+      <>
+        <Header 
+            user={this.props.user}
+            handleLogout={this.props.handleLogout}
+            quote={this.props.quote}
+            quoteAuth={this.props.quoteAuth}
+            open={this.props.open}
+            onOpen={this.props.onOpen}
+            onClose={this.props.onClose}
         />
-        <CssBaseline />
-        <div className={this.props.classes.paper}>
-          <Avatar className={this.props.classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign In
-          </Typography>
-          <form className={this.props.classes.form} noValidate onSubmit={this.handleSubmit}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={this.handleChange}
-              value={this.state.email}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="pw"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={this.handleChange}
-              value={this.state.pw}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={this.props.classes.submit}
-            >
+        <Container component="main" maxWidth="xs">
+          <Head 
+            title={this.props.title}
+            pageTitle='Login'
+          />
+          <CssBaseline />
+          <div className={this.props.classes.paper}>
+            <Avatar className={this.props.classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
               Sign In
-            </Button>
-            <Link href="/" className="cancel">
-              <Button 
+            </Typography>
+            <form className={this.props.classes.form} noValidate onSubmit={this.handleSubmit}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="pw"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={this.state.pw}
+                onChange={this.handleChange}
+              />
+              <FormControlLabel
+                control={<Checkbox
+                   color="primary"
+                   name="remember"
+                   defaultChecked={this.state.remember}
+                   onChange={this.handleClick}
+                />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
                 fullWidth
                 variant="contained"
-                color="danger"       
+                color="primary"
+                disabled={this.isFormInvalid()}
+                className={this.props.classes.submit}
               >
-                Cancel
+                Sign In
               </Button>
-            </Link>
-            <Grid container className={this.props.classes.grid}>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+              <Link href="/" className="cancel">
+                <Button 
+                  fullWidth
+                  variant="contained"    
+                >
+                  Cancel
+                </Button>
+              </Link>
+              <Grid container className={this.props.classes.grid}>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={8}>
-          <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://aarondguyett.com">
-              Aaron Guyett
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-          </Typography>
-        </Box>
-      </Container>
+            </form>
+          </div>
+          <FormCopyright />
+            {this.state.message &&
+              <Snackbar
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left'
+                }}
+                open={this.state.open}
+                autoHideDuration={6000}
+                onClose={this.handleClose}
+                message={this.state.message}
+                action={
+                  <React.Fragment>
+                    <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleClose}>
+                      <CloseIcon fontSize="small" />
+                    </IconButton>
+                  </React.Fragment>
+                }
+              />
+            }
+        </Container>
+      </>
     );
   }
 }

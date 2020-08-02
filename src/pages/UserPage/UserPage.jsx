@@ -3,10 +3,9 @@ import Layout from '../../components/Layout/Layout';
 
 const UserPage = (props) => {
     return (
-        <>
             <Layout
             title={props.title}
-            pageTitle={props.user.name}
+            pageTitle={props.user.firstName + " " + props.user.lastName}
             keywords="aaron, guyett, scsr, success"
             user={props.user}
             handleLogout={props.handleLogout}
@@ -15,16 +14,20 @@ const UserPage = (props) => {
             open={props.open}
             onOpen={props.onOpen}
             onClose={props.onClose}
-            />
-            <p>{props.user.name}</p>
-            <p>{props.user.name}</p>
-            <p>{props.user.name}</p>
-            <p>{props.user.name}</p>
-            <p>{props.user.name}</p>
-            <p>{props.user.name}</p>
-            <p>{props.user.name}</p>
-            <p>{props.user.name}</p>
-        </>
+            >
+               <p>Hi!</p>
+               <p>Hi!</p>
+
+               <p>Hi!</p>
+
+               <p>Hi!</p>
+               <p>Hi!</p>
+               <p>Hi!</p>
+               <p>Hi!</p>
+               <p>Hi!</p>
+               <p>Hi!</p>
+
+            </Layout>
     )
 }
 

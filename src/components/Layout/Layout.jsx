@@ -4,9 +4,7 @@ import Footer from '../Footer/Footer';
 import Head from '../Head/Head';
 import './Layout.css';
 
-// Fix Head
-
-export default function Layout(props) {
+export default function Layout({ children, ...props }) {
     return (
         <Fragment>
             <Head {...props} />
@@ -19,6 +17,7 @@ export default function Layout(props) {
                 onOpen={props.onOpen}
                 onClose={props.onClose}
             />
+            <main>{children}</main>
             <Footer />
         </Fragment>
     )

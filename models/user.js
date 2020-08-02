@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS);
 
 const userSchema = new mongoose.Schema({
-    name: String,
+    firstName: String,
+    lastName: String,
     email: {
         type: String,
         required: true,
@@ -19,7 +20,11 @@ const userSchema = new mongoose.Schema({
     bio: {
         type: String
     },
-    avatarURL: String
+    avatarURL: String,
+    newsletter: {
+      type: Boolean,
+      default: false
+    }
 }, {timestamps: true});
 
 userSchema.set('toJSON', {

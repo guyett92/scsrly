@@ -66,7 +66,7 @@ class Sidebar extends Component {
                   } />
                 </ListItemAvatar>
                 <ListItemText>
-                  Hi there, {user.name.split(' ')[0]}!
+                  Hi there, {user.firstName}!
                 </ListItemText>
               </ListItem>
               <ListItem button key="Log Out" aria-label="logout" onClick={handleLogout}>
@@ -104,14 +104,16 @@ class Sidebar extends Component {
         </List>
         <Divider />
         <List>
-          <ListItem button key="Goals" aria-label="goals">
-            <ListItemIcon>
-              <AssignmentTurnedInRoundedIcon />
-            </ListItemIcon>
-            <ListItemText>
-              Goals
-            </ListItemText>
-          </ListItem>
+          <Link to="/goals" className="login">
+            <ListItem button key="Goals" aria-label="goals">
+              <ListItemIcon>
+                <AssignmentTurnedInRoundedIcon />
+              </ListItemIcon>
+              <ListItemText>
+                Goals
+              </ListItemText>
+            </ListItem>
+          </Link>
         </List>
       </div>
     );

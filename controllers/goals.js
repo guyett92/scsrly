@@ -19,6 +19,7 @@ async function getGoals(req, res) {
 async function create(req, res) {
     try {
         // Find the user who created the goal
+        console.log(req.user.id);
         const user = await User.findById(req.user.id);
         // Create the goal
         const goal = await Goal.create(req.body);

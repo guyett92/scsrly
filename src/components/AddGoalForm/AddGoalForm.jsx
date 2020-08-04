@@ -85,7 +85,6 @@ class AddGoalForm extends Component {
     }
 
     handleAddTask = () => {
-        
         this.setState({
             tasks: this.state.tasks.concat([{ name: "" }])
         });
@@ -95,7 +94,10 @@ class AddGoalForm extends Component {
         this.setState({
             tasks: this.state.tasks.filter((s, sidx) => idx !== sidx)
         });
+    }
 
+    handleAddGoal = async (goal) => {
+        await goalService.createGoal(goal);
     }
 
     /* Verify each field is filled out AND all tasks have content */
@@ -108,7 +110,7 @@ class AddGoalForm extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          await goalService.createGoal(this.state);
+          this.handleAddGoal(this.state);
           this.props.history.push('/');
         } catch (err) {
           this.updateMessage(err.message);

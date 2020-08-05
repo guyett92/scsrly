@@ -1,34 +1,3 @@
-// import React, { Component } from 'react';
-// import SignupForm from '../../components/SignupForm/SignupForm';
-// import Head from '../../components/Head/Head';
-
-// class SignupPage extends Component {
-  
-//   constructor(props) {
-//     super(props);
-//     this.state = {message: ''}
-//   }
-
-//   updateMessage = (msg) => {
-//     this.setState({message: msg});
-//   }
-
-//   render() {
-//     return (
-//       <div className='SignupPage'>
-//         <Head 
-//           title={this.props.title}
-//           pageTitle='Sign Up'
-//         />
-//         <SignupForm {...this.props} updateMessage={this.updateMessage} />
-//         <p>{this.state.message}</p>
-//       </div>
-//     );
-//   }
-// }
-
-// export default SignupPage;
-
 import React, { Component } from 'react';
 import {
   CssBaseline,
@@ -98,6 +67,7 @@ class SignupPage extends Component {
           <Head 
             title={this.props.title}
             pageTitle='Sign Up'
+            description='Sign up to start working towards your future now!'
           />
           <CssBaseline />
           <SignUpForm {...this.props} updateMessage={this.updateMessage} />

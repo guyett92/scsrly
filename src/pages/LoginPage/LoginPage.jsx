@@ -114,6 +114,7 @@ class LoginPage extends Component {
           <Head 
             title={this.props.title}
             pageTitle='Login'
+            description="Login now to begin at Scsr.ly!"
           />
           <CssBaseline />
           <div className={this.props.classes.paper}>

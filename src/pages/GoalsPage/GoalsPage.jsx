@@ -31,8 +31,9 @@ export default function GoalsPage(props) {
     return (
         <Layout
         title={props.title}
-        pageTitle="Home"
+        pageTitle="Goals"
         keywords="aaron, guyett, goals, page"
+        description="View your goals and see popular goals on the Scsr.ly platform."
         user={props.user}
         handleLogout={props.handleLogout}
         quote={props.quote}
@@ -45,6 +46,8 @@ export default function GoalsPage(props) {
                 <Container maxwidth="md">
                     <Goals 
                         user={props.user}
+                        userGoals={props.userGoals}
+                        handleUpdateGoals={props.handleUpdateGoals}
                     />
                 </Container>
             }

@@ -6,8 +6,9 @@ const AddGoalPage = (props) => {
     return (
         <Layout
             title={props.title}
-            pageTitle="Home"
+            pageTitle="Add Goal"
             keywords="aaron, guyett, add, goal"
+            description="Add a goal through to begin the first stages of towards your success."
             user={props.user}
             handleLogout={props.handleLogout}
             quote={props.quote}

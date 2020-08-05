@@ -19,7 +19,8 @@ export default class App extends Component {
     this.state = {
       user: userService.getUser(),
       title: "Scsr.ly",
-      openSidebar: false
+      openSidebar: false,
+      userGoals: []
     };
   }
 
@@ -40,13 +41,17 @@ export default class App extends Component {
     this.setState({ openSidebar: false });
   };
 
-  async componentDidMount() {
-    const quote = await getQOD('inspire');
-    this.setState({
-      quote: quote.contents.quotes[0].quote,
-      quoteAuth: quote.contents.quotes[0].author
-    });
+  handleUpdateGoals = (userGoals) => {
+    this.setState({ userGoals });
   }
+
+  // async componentDidMount() {
+  //   const quote = await getQOD('inspire');
+  //   this.setState({
+  //     quote: quote.contents.quotes[0].quote,
+  //     quoteAuth: quote.contents.quotes[0].author,
+  //   });
+  // }
 
   render() {
     return (
@@ -127,6 +132,8 @@ export default class App extends Component {
                 open={this.state.openSidebar}
                 onOpen={this.handleSidebarOpen}
                 onClose={this.handleSidebarClose}
+                handleUpdateGoals={this.handleUpdateGoals}
+                userGoals={this.state.userGoals}
               />
             }/>
             <Route exact path='/addgoal' render={ (props) =>

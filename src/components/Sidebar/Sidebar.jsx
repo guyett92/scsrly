@@ -14,6 +14,7 @@ import {
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded"
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import AssignmentTurnedInRoundedIcon from '@material-ui/icons/AssignmentTurnedInRounded';
+import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import './Sidebar.css';
 
 const styles = {
@@ -111,6 +112,16 @@ class Sidebar extends Component {
               </ListItemIcon>
               <ListItemText>
                 Goals
+              </ListItemText>
+            </ListItem>
+          </Link>
+          <Link to="/addgoal" className="login">
+            <ListItem button key="Add Goal" aria-label="add goal">
+              <ListItemIcon>
+                <AddCircleRoundedIcon />
+              </ListItemIcon>
+              <ListItemText>
+                Add a Goal
               </ListItemText>
             </ListItem>
           </Link>

@@ -72,17 +72,19 @@ class Navbar extends Component {
                 &nbsp;&nbsp;&nbsp;&nbsp;
               </Hidden>
           }
-          <Paper component="form" className={this.props.classes.root}>
-            <InputBase
-              className={this.props.classes.input}
-              placeholder="Search..."
-              inputProps={{ 'aria-label': 'Search' }}
-            />
-            <Divider className={this.props.classes.divider} orientation="vertical" />
-            <IconButton type="submit" color="secondary" className={this.props.classes.iconButton} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-          </Paper>
+          <Hidden smDown>
+            <Paper component="form" className={this.props.classes.root}>
+              <InputBase
+                className={this.props.classes.input}
+                placeholder="Search..."
+                inputProps={{ 'aria-label': 'Search' }}
+              />
+              <Divider className={this.props.classes.divider} orientation="vertical" />
+              <IconButton type="submit" color="secondary" className={this.props.classes.iconButton} aria-label="search">
+                <SearchIcon />
+              </IconButton>
+            </Paper>
+          </Hidden>
             <IconButton onClick={this.props.onSidebarOpen} className='right' edge="end" aria-label="menu">
               <MenuIcon style={{color: "white"}} />
             </IconButton>

@@ -9,19 +9,42 @@ import {
   ListItemIcon,
   ListItemText,
   Avatar,
-  SwipeableDrawer
+  SwipeableDrawer,
+  Hidden,
+  Paper,
+  InputBase,
+  IconButton,
   } from "@material-ui/core";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded"
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import AssignmentTurnedInRoundedIcon from '@material-ui/icons/AssignmentTurnedInRounded';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
+import SearchIcon from '@material-ui/icons/Search';
+import MeetingRoomRoundedIcon from '@material-ui/icons/MeetingRoomRounded';
 import './Sidebar.css';
 
-const styles = {
+const styles = theme => ({
   fullList: {
     width: 300
-  }
-};
+  },  
+  root: {
+    padding: '2px 4px',
+    display: 'flex',
+    width: 400,
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+  },
+  iconButton: {
+    padding: 10,
+    float: 'right'
+  },
+  divider: {
+    height: 28,
+    margin: 4,
+  },
+});
 
 class Sidebar extends Component {
   constructor(props) {
@@ -80,16 +103,28 @@ class Sidebar extends Component {
               </ListItem>
             </>
             :
-            <Link to="/login" className="login">
-              <ListItem button key="Log In" aria-label="login">
-                <ListItemIcon>
-                  <AccountCircleRoundedIcon />
-                </ListItemIcon>
-                <ListItemText>
-                  Log In
-                </ListItemText>
-              </ListItem>
-            </Link>
+            <>
+              <Link to="/signup" className="login">
+                <ListItem button key="Sign Up" aria-label="sign up">
+                  <ListItemIcon>
+                    <MeetingRoomRoundedIcon />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Sign Up
+                  </ListItemText>
+                </ListItem>
+                </Link>
+                <Link to="/login" className="login">
+                <ListItem button key="Log In" aria-label="login">
+                  <ListItemIcon>
+                    <AccountCircleRoundedIcon />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Log In
+                  </ListItemText>
+                </ListItem>
+              </Link>
+            </>
           }
           <Divider />
           <ListItem>
@@ -125,6 +160,21 @@ class Sidebar extends Component {
               </ListItemText>
             </ListItem>
           </Link>
+          <Hidden smDown>
+            <ListItem>
+              <Paper component="form" className={classes.root}>
+                <InputBase
+                  className={classes.input}
+                  placeholder="Search..."
+                  inputProps={{ 'aria-label': 'Search' }}
+                />
+                <Divider className={classes.divider} orientation="vertical" />
+                <IconButton type="submit" color="secondary" className={classes.iconButton} aria-label="search">
+                  <SearchIcon />
+                </IconButton>
+              </Paper>
+            </ListItem>
+          </Hidden>
         </List>
       </div>
     );

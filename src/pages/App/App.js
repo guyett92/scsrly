@@ -45,13 +45,13 @@ export default class App extends Component {
     this.setState({ userGoals });
   }
 
-  // async componentDidMount() {
-  //   const quote = await getQOD('inspire');
-  //   this.setState({
-  //     quote: quote.contents.quotes[0].quote,
-  //     quoteAuth: quote.contents.quotes[0].author,
-  //   });
-  // }
+  async componentDidMount() {
+    const quote = await getQOD('inspire');
+    this.setState({
+      quote: quote.contents.quotes[0].quote,
+      quoteAuth: quote.contents.quotes[0].author,
+    });
+  }
 
   render() {
     return (

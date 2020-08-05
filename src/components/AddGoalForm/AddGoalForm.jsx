@@ -171,7 +171,7 @@ class AddGoalForm extends Component {
                         />
                         <h4>Add Tasks</h4>
                         {this.state.tasks.map((task, idx) => (
-                            <div>
+                            <div key={idx}>
                                 <TextField
                                     className={this.props.classes.task}
                                     id="task"

@@ -4,11 +4,13 @@ import {
     CssBaseline,
     Link,
     Button,
-    Grid
+    Grid,
+    Fab
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import GoalCard from '../GoalCard/GoalCard';
 import goalService from '../../utils/goalService';
+import AddIcon from '@material-ui/icons/Add';
 
 
 const styles = theme => ({
@@ -22,6 +24,11 @@ const styles = theme => ({
         margin: theme.spacing(3, 0, 2),
         textDecoration: 'none',
     },
+    fab: {
+        position: 'absolute',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
+    },
 });
 
 
@@ -32,7 +39,13 @@ class Goals extends Component {
         this.props.handleUpdateGoals(goals);
     }
 
+    handleRemoveGoal = async id => {
+        const goals = await goalService.removeGoal(id);
+        this.props.handleUpdateGoals(goals);
+    }
+
     render() {
+
         const goalCards = this.props.userGoals.map((goal, idx) => (
             <GoalCard 
                 key={idx}
@@ -40,26 +53,14 @@ class Goals extends Component {
                 description={goal.description}
                 goalDate={goal.goalDate}
                 tasks={goal.tasks}
+                goalId={goal._id}
+                handleRemoveGoal={this.handleRemoveGoal}
             />
         ))
 
         return (
             <div style={{textAlign: 'center'}} className={this.props.classes.paper}>
-                { this.props.userGoals.length > 0 ? /* FIXME: This is where to check if the user has goals in an array */
-                    /* FIXME: Map out goals to the following card
-                    {goals.map ( goals =>
-                        <Grid key={goal.id} item
-                            xs={12} sm={6} md={4} xl={3}
-                        >
-                        <GoalCard
-                            key={goal.id}
-                            name={goal.name}
-                            description={goal.description}
-                            goalDate={goal.goalDate}
-                            tasks={goal.tasks}
-                        )}
-                        />
-                    */
+                { this.props.userGoals.length > 0 ? 
                 <Container>
                 <CssBaseline />
                     <Grid 
@@ -87,6 +88,9 @@ class Goals extends Component {
                         </div>
                     </Container>
                 }
+                <Fab aria-label="add goal" className={this.props.classes.fab} color="primary" href="/addgoal">
+                    <AddIcon />
+                </Fab>
             </div>
         )
     }

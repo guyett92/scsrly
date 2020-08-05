@@ -5,7 +5,29 @@ module.exports = {
     index,
     create,
     getGoals,
+    deleteGoal
 };
+
+async function deleteGoal(req, res) {
+    try {
+        /* Remove from the user's array as well */
+        await Goal.findByIdAndDelete(req.params.id);
+        const user = await User.findById(req.user._id);
+        for (let i = 0; i < user.goals.length; i++) {
+            if (user.goals[i].equals(req.params.id)) {
+                user.goals.splice(i, 1);
+            }
+            user.save(function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            })
+        }
+        getGoals(req, res);
+    } catch (err) {
+        res.status(400).json({message: "something went wrong"});
+    }
+}
 
 async function getGoals(req, res) {
     try {

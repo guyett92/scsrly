@@ -1,3 +1,4 @@
+/* Import tokenService to get authorization token for user */
 import tokenService from './tokenService';
 
 const baseURL = '/api/goals/';
@@ -5,8 +6,16 @@ const baseURL = '/api/goals/';
 export default {
     // FIXME: create index
     getGoals,
-    createGoal
+    createGoal,
+    removeGoal,
 };
+
+function removeGoal(id) {
+    return fetch(baseURL + id, {
+        method: 'DELETE',
+        headers: new Headers({'authorization': 'Bearer ' + tokenService.getToken()})
+    }).then(res => res.json());
+}
 
 function getGoals() {
     return fetch(baseURL + 'getGoals', {

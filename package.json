@@ -1,6 +1,10 @@
 {
-  "name": "success-tracker",
+  "name": "scsrly",
+  "description": "an app to promote success",
   "version": "0.1.0",
+  "engines": {
+    "node": "14.x"
+  },
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",

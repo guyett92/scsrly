@@ -1,4 +1,4 @@
-# Scsr.ly v0.40
+# Scsr.ly v0.67
 [Scsr.ly ](https://success-snake.herokuapp.com) is a social media app that utilizes the MERN stack and is hosted on Heroku.
 ## Features
 Users can create an account to share their goals with others. A goal is broken down into tasks and users can give kudos to others when a task is completed or shared. The application helps track goals and utilizes an API to display motivational quotes while connecting others with like-minded people.
@@ -24,6 +24,9 @@ Coming soon!
 * Users can login or logout.
 * Users can see a motivational quote.
 * Users can view an account page.
+* Users can add a goal.
+* Users can complete or remove tasks.
+* Users can edit goal descriptions.
 * Users can be frustrated by features that look implemented but do not yet function (ex. search).
 ## Planning
 * [Trello Board](https://trello.com/b/3Zyw3cIf/success-platform)
@@ -38,5 +41,5 @@ Coming soon!
 * Integrate stats API
 * Integrate graphing API
 ## Some Stats
-* Most deletions in one day: 440
+* Most deletions in one day: 721
 * Most insertions in one day: 990

@@ -34,6 +34,10 @@ const styles = theme => ({
 
 class Goals extends Component {
 
+    state = {
+        description: ''
+    }
+
     async componentDidMount() {
         const goals = await goalService.getGoals();
         this.props.handleUpdateGoals(goals);
@@ -42,7 +46,25 @@ class Goals extends Component {
     handleRemoveGoal = async id => {
         const goals = await goalService.removeGoal(id);
         this.props.handleUpdateGoals(goals);
+        this.props.history.push('/');
     }
+
+    handleUpdateTask = async (tId, gId) => {
+        const goals = await goalService.updateTask(tId, gId);
+        this.props.handleUpdateGoals(goals);
+    }
+
+    handleDeleteTask = async (tId, gId) => {
+        const goals = await goalService.deleteTask(tId, gId);
+        this.props.handleUpdateGoals(goals);
+    }
+// FIXME: Allow goal updates to description
+    handleEditGoalDesc = async (id, desc) => {
+        this.setState({description: desc})
+        const goals = await goalService.editGoalDesc(id, this.state);
+        this.props.handleUpdateGoals(goals);
+    }
+
 
     render() {
 
@@ -55,6 +77,9 @@ class Goals extends Component {
                 tasks={goal.tasks}
                 goalId={goal._id}
                 handleRemoveGoal={this.handleRemoveGoal}
+                handleUpdateTask={this.handleUpdateTask}
+                handleDeleteTask={this.handleDeleteTask}
+                handleEditGoalDesc={this.handleEditGoalDesc}
             />
         ))
 
@@ -64,8 +89,9 @@ class Goals extends Component {
                 <Container>
                 <CssBaseline />
                     <Grid 
-                        spacing={10}
-                        style={{padding: '24px'}}
+                        spacing={3}
+                        style={{padding: ''}}
+                        container
                     >
                         { goalCards }
                     </Grid>

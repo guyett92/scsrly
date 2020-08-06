@@ -166,7 +166,7 @@ class Sidebar extends Component {
                 <InputBase
                   className={classes.input}
                   placeholder="Search..."
-                  inputProps={{ 'aria-label': 'Search' }}
+                  inputProps={{ 'aria-label': 'Search', MenuProps: { disablePortal: true } }}
                 />
                 <Divider className={classes.divider} orientation="vertical" />
                 <IconButton type="submit" color="secondary" className={classes.iconButton} aria-label="search">

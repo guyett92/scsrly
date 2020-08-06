@@ -48,6 +48,7 @@ export default function GoalsPage(props) {
                         user={props.user}
                         userGoals={props.userGoals}
                         handleUpdateGoals={props.handleUpdateGoals}
+                        history={props.history}
                     />
                 </Container>
             }

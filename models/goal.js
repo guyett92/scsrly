@@ -12,7 +12,16 @@ const goalSchema = new Schema({
         type: Array,
         default: []
     },
-    tasks: Array,
+    tasks: [{
+        name: {
+            type: String,
+            require: true
+        },
+        completed: {
+            type: Boolean,
+            default: false
+        }
+    }],
     comments: Array
 }, {timestamps: true});
 

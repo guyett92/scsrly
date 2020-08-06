@@ -99,6 +99,7 @@ const HomePage = (props) => {
             >
                 <Grid item>
                     <Zoom
+                        style={{textAlign: 'center', alignItems: 'center',}} 
                         in
                     >
                         <Typography 

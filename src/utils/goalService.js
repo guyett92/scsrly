@@ -8,7 +8,24 @@ export default {
     getGoals,
     createGoal,
     removeGoal,
+    updateTask,
+    deleteTask,
+    editGoalDesc,
 };
+
+function deleteTask(tId, gId) {
+    return fetch(baseURL + 'delete/' + gId + '/' + tId, {
+        method: 'PUT',
+        headers: new Headers({'authorization': 'Bearer ' + tokenService.getToken()})
+    }).then(res => res.json());
+}
+
+function updateTask(tId, gId) {
+    return fetch(baseURL + 'update/' + gId + '/' + tId, {
+        method: 'PUT',
+        headers: new Headers({'authorization': 'Bearer ' + tokenService.getToken()})
+    }).then(res => res.json());
+}
 
 function removeGoal(id) {
     return fetch(baseURL + id, {
@@ -30,6 +47,17 @@ function createGoal(goal) {
         method: 'POST',
         headers: new Headers({'Content-Type': 'application/json', 'authorization': 'Bearer ' + tokenService.getToken()}),
         body: JSON.stringify(goal)
+    })
+    .then(res => {
+        if (res.ok) return res.json();
+    });
+}
+
+function editGoalDesc(id, description) {
+    return fetch(baseURL + 'editgoaldesc/' + id, {
+        method: 'PUT',
+        headers: new Headers({'Content-Type': 'application/json', 'authorization': 'Bearer ' + tokenService.getToken()}),
+        body: JSON.stringify(description)
     })
     .then(res => {
         if (res.ok) return res.json();

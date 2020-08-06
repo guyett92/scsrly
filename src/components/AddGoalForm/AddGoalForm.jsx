@@ -111,7 +111,7 @@ class AddGoalForm extends Component {
         e.preventDefault();
         try {
           this.handleAddGoal(this.state);
-          this.props.history.push('/');
+          this.props.history.push('/goals');
         } catch (err) {
           this.updateMessage(err.message);
           this.setState({open: true});

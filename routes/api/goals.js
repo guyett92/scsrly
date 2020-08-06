@@ -12,5 +12,11 @@ router.get('/', goalsCtrl.index);
 router.post('/addgoal', goalsCtrl.create);
 // DELETE /api/goals/:id
 router.delete('/:id', goalsCtrl.deleteGoal);
+// PUT task update /api/goals/:id/:id
+router.put('/update/:gid/:tid', goalsCtrl.updateTask);
+// PUT task delete /api/goals/:id
+router.put('/delete/:gid/:tid', goalsCtrl.deleteTask);
+// PUT update goal desc
+router.put('/editgoaldesc/:id', goalsCtrl.editDescription);
 
 module.exports = router;

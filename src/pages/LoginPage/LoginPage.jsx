@@ -12,10 +12,13 @@ import {
   Container,
   Snackbar,
   IconButton,
-  withStyles
+  withStyles,
+  InputAdornment
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import CloseIcon from '@material-ui/icons/Close';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import userService from '../../utils/userService';
 import Head from '../../components/Head/Head';
 import Header from '../../components/Header/Header';
@@ -51,7 +54,16 @@ class LoginPage extends Component {
       email: '',
       pw: '',
       message: '',
-      open: false
+      open: false,
+      showPassword: false,
+    };
+
+    handleClickShowPassword = (e) => {
+      if (this.state.showPassword) {
+        this.setState({ showPassword: false });
+      } else {
+        this.setState({ showPassword: true });
+      }
     };
 
     updateMessage = (msg) => {
@@ -145,11 +157,19 @@ class LoginPage extends Component {
                 fullWidth
                 name="pw"
                 label="Password"
-                type="password"
+                type={!this.state.showPassword ? "password" : "text"}
                 id="password"
                 autoComplete="current-password"
                 value={this.state.pw}
                 onChange={this.handleChange}
+                InputProps={{
+                  endAdornment: 
+                    <InputAdornment position="end">
+                      <IconButton onClick={this.handleClickShowPassword} aria-label="toggle password visibility" edge="end">
+                        {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                }}
               />
               <FormControlLabel
                 control={<Checkbox

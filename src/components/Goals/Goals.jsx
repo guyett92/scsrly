@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import GoalCard from '../GoalCard/GoalCard';
+import Loader from '../Loader/Loader';
 import goalService from '../../utils/goalService';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -34,10 +35,26 @@ const styles = theme => ({
 
 
 class Goals extends Component {
+    
+    state = {
+        loading: true,
+    }
+
+    sleep = milliseconds => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds));
+    }
+
+    wait = async (milliseconds = 1000) => {
+        await this.sleep(milliseconds);
+        this.setState({
+            loading: false
+        });
+    }
 
     async componentDidMount() {
         const goals = await goalService.getGoals();
         this.props.handleUpdateGoals(goals);
+        this.wait(1000);
     }
 
     handleRemoveGoal = async id => {
@@ -63,7 +80,7 @@ class Goals extends Component {
 
 
     render() {
-
+        if (this.state.loading && this.props.userGoals.length) return <Loader />
         const goalCards = this.props.userGoals.map((goal, idx) => (
             <GoalCard 
                 key={idx}

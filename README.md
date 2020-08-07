@@ -27,6 +27,7 @@ Coming soon!
 * Users can add a goal.
 * Users can complete or remove tasks.
 * Users can edit goal descriptions.
+* Users can view loading screens.
 * Users can be frustrated by features that look implemented but do not yet function (ex. search).
 ## Planning
 * [Trello Board](https://trello.com/b/3Zyw3cIf/success-platform)

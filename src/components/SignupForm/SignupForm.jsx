@@ -9,8 +9,12 @@ import {
   Grid,
   Link,
   Typography,
+  InputAdornment,
+  IconButton
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { withStyles } from '@material-ui/core/styles';
 import FormCopyright from '../FormCopyRight/FormCopyRight';
 
@@ -42,7 +46,16 @@ class SignupForm extends Component {
     email: '',
     password: '',
     passwordConf: '',
-    newsletter: false
+    newsletter: false,
+    showPassword: false
+  };
+
+  handleClickShowPassword = (e) => {
+    if (this.state.showPassword) {
+      this.setState({ showPassword: false });
+    } else {
+      this.setState({ showPassword: true });
+    }
   };
 
   handleChange = (e) => {
@@ -137,22 +150,31 @@ class SignupForm extends Component {
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
                   id="password"
                   autoComplete="current-password"
                   value={this.state.password}
                   onChange={this.handleChange}
+                  type={!this.state.showPassword ? "password" : "text"}
+                  InputProps={{
+                    endAdornment: 
+                      <InputAdornment position="end">
+                        <IconButton onClick={this.handleClickShowPassword} aria-label="toggle password visibility" edge="end">
+                          {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
+                  autoComplete="new-password"
                   required
                   fullWidth
                   name="passwordConf"
                   label="Confirm Password"
                   type="password"
-                  id="password"
+                  id="passwordConf"
                   value={this.state.passwordConf}
                   onChange={this.handleChange}
                 />

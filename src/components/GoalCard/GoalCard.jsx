@@ -78,7 +78,6 @@ class GoalCard extends Component {
     }
 
     handleEdit = (e) => {
-        console.log('flipping');
         if (!this.state.editable) {
             this.setState({editable: true});
         } else {
@@ -113,7 +112,6 @@ class GoalCard extends Component {
     handleEditGoalDescClick = (e) => {
         e.preventDefault();
         this.props.handleEditGoalDesc(this.props.goalId, this.state);
-        console.log('Submitted!');
     }
 
     handleSnackbarClose = (e, reason) => {

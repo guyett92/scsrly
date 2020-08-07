@@ -144,6 +144,7 @@ class GoalCard extends Component {
                             <Typography variant="body2" style={this.taskCompletionUpdate() > 0 ? {color : '#f44336'} : {color: 'green'}} component="p">
                                 <span><strong>{this.taskCompletionUpdate()} {!this.taskCompletionUpdate() ? 'tasks to complete. Great job!' : 'task(s) to complete.'}</strong></span>
                             </Typography>
+                            Due {this.props.goalDate.split('T')[0]}
                         </CardContent>
                     </CardActionArea>
                 </Link>

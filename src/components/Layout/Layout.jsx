@@ -17,8 +17,10 @@ export default function Layout({ children, ...props }) {
                 onOpen={props.onOpen}
                 onClose={props.onClose}
             />
-            <main>{children}</main>
-            <Footer />
+            <main className="content-style">{children}</main>
+            <div className="footer-style">
+                <Footer />
+            </div>
         </Fragment>
     )
 }

@@ -22,6 +22,9 @@ const goalSchema = new Schema({
             default: false
         }
     }],
+    files: [{
+       type: Object 
+    }],
     comments: Array
 }, {timestamps: true});
 

@@ -10,7 +10,6 @@ import {
   ListItemText,
   Avatar,
   SwipeableDrawer,
-  Hidden,
   Paper,
   InputBase,
   IconButton,
@@ -74,25 +73,25 @@ class Sidebar extends Component {
       <div
         className={classes.fullList}
         role="presentation"
-        onClick={onClose}
-        onKeyDown={onClose}
       >
         <List>
           {user ?
-            <>
-              <ListItem button key="Avatar" aria-label="avatar" >
-                <ListItemAvatar>
-                  <Avatar alt={user.name} src={
-                    user.avatarURL ?
-                    user.avatarURL
-                    :
-                    ""
-                  } />
-                </ListItemAvatar>
-                <ListItemText>
-                  Hi there, {user.firstName}!
-                </ListItemText>
-              </ListItem>
+            <div onClick={onClose}>
+              <Link to="/user" className="login">
+                <ListItem button key="Avatar" aria-label="avatar" >
+                  <ListItemAvatar>
+                    <Avatar alt={user.name} src={
+                      user.avatarURL ?
+                      user.avatarURL
+                      :
+                      ""
+                    } />
+                  </ListItemAvatar>
+                  <ListItemText>
+                    Hi there, {user.firstName}!
+                  </ListItemText>
+                </ListItem>
+              </Link>
               <ListItem button key="Log Out" aria-label="logout" onClick={handleLogout}>
                 <ListItemIcon>
                   <ExitToAppRoundedIcon />
@@ -101,9 +100,9 @@ class Sidebar extends Component {
                   Log Out
                 </ListItemText>
               </ListItem>
-            </>
+            </div>
             :
-            <>
+            <div onClick={onClose}>
               <Link to="/signup" className="login">
                 <ListItem button key="Sign Up" aria-label="sign up">
                   <ListItemIcon>
@@ -124,7 +123,7 @@ class Sidebar extends Component {
                   </ListItemText>
                 </ListItem>
               </Link>
-            </>
+            </div>
           }
           <Divider />
           <ListItem>
@@ -140,6 +139,7 @@ class Sidebar extends Component {
         </List>
         <Divider />
         <List>
+          <div onClick={onClose}>
           <Link to="/goals" className="login">
             <ListItem button key="Goals" aria-label="goals">
               <ListItemIcon>
@@ -160,21 +160,21 @@ class Sidebar extends Component {
               </ListItemText>
             </ListItem>
           </Link>
-          <Hidden smDown>
-            <ListItem>
-              <Paper component="form" className={classes.root}>
-                <InputBase
-                  className={classes.input}
-                  placeholder="Search..."
-                  inputProps={{ 'aria-label': 'Search' }}
-                />
-                <Divider className={classes.divider} orientation="vertical" />
-                <IconButton type="submit" color="secondary" className={classes.iconButton} aria-label="search">
-                  <SearchIcon />
-                </IconButton>
-              </Paper>
-            </ListItem>
-          </Hidden>
+          </div>
+          <ListItem>
+            <Paper component="form" className={classes.root}>
+              <InputBase
+                className={classes.input}
+                placeholder="Search..."
+                inputProps={{ 'aria-label': 'Search' }}
+                onFocus={() => {}}
+              />
+              <Divider className={classes.divider} orientation="vertical" />
+              <IconButton type="submit" color="secondary" className={classes.iconButton} aria-label="search">
+                <SearchIcon />
+              </IconButton>
+            </Paper>
+          </ListItem>
         </List>
       </div>
     );

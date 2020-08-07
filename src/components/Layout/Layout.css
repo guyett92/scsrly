@@ -1,0 +1,12 @@
+.footer-style {
+    border-top: 2px solid #446878;
+    box-sizing: border-box;
+
+}
+.content-style {
+    min-height: 75vh;
+}
+
+html, body {
+    height: 100%;
+}

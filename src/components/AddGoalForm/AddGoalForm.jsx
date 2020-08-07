@@ -19,6 +19,13 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import goalService from '../../utils/goalService';
+// Import React FilePond
+import { FilePond, registerPlugin } from "react-filepond";
+// Import FilePond styles
+import "filepond/dist/filepond.min.css";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 
 const styles = theme => ({
     paper: {
@@ -46,6 +53,8 @@ const styles = theme => ({
     },
 });
 
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
+
 class AddGoalForm extends Component {
 
     state = {
@@ -53,7 +62,19 @@ class AddGoalForm extends Component {
         description: '',
         goalDate: `${new Date().toISOString().split('T')[0]}`,
         tasks: [{name: ""}],
+        files: [
+            {
+                source: "index.html",
+                options:{
+                    type: "local"
+                }
+            }
+        ]
     };
+
+    handleInit() {
+        console.log(this.pond);
+    }
 
     updateMessage = (msg) => {
         this.setState({message: msg, open: true});
@@ -167,6 +188,21 @@ class AddGoalForm extends Component {
                             }}
                             onChange={this.handleChange}
                             variant="outlined"
+                        />
+                        <FilePond
+                            ref={ref => (this.pond = ref)}
+                            files={this.state.files}
+                            allowMultiple={true}
+                            allowReorder={true}
+                            maxFiles={3}
+                            server="/api"
+                            name="files"
+                            oninit={() => this.handleInit()}
+                            onupdatefiles={fileItems => {
+                                this.setState({
+                                    files:fileItems.map(fileItem => fileItem.file)
+                                });
+                            }}
                         />
                         <h4>Add Tasks</h4>
                         {this.state.tasks.map((task, idx) => (

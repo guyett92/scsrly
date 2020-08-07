@@ -1,6 +1,10 @@
 import React from 'react';
 import {
-    Grid, ListItem, ListItemText, List, ListItemIcon, Typography,
+    Grid,
+    ListItem,
+    ListItemText,
+    List,
+    ListItemIcon,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -39,12 +43,12 @@ export default function FooterCollapse() {
 
     return(
         <Grid className={classes.root} container alignContent='center' alignItems='center'>
-            <Grid className={classes.grid} item xs={4}>
+            <Grid className={classes.grid} item xs={6}>
                 <List component="nav" aria-label="sitemap">
                     <Link to="/" className={classes.link}>
                         <ListItem button className={classes.listItem}>
                             <ListItemIcon>
-                                <HomeRoundedIcon />
+                                <HomeRoundedIcon color="primary" />
                             </ListItemIcon>
                             <ListItemText>
                                 Home
@@ -54,37 +58,37 @@ export default function FooterCollapse() {
                     <Link to="/goals" className={classes.link}>
                         <ListItem button className={classes.listItem}>
                             <ListItemIcon>
-                                <AssignmentTurnedInRoundedIcon />
+                                <AssignmentTurnedInRoundedIcon color="primary" />
                             </ListItemIcon>
                             <ListItemText>
-                                User Goals
+                                Goals
                             </ListItemText>
                         </ListItem>
                     </Link>
                     <Link to="/sharedgoals" className={classes.link}>
                         <ListItem button className={classes.listItem}>
                             <ListItemIcon>
-                                <StreetviewRoundedIcon />
+                                <StreetviewRoundedIcon color="primary" />
                             </ListItemIcon>
                             <ListItemText>
-                                Public Goals - Coming soon!
+                                View
                             </ListItemText>
                         </ListItem>
                     </Link>
                     <Link to="/signup" className={classes.link}>
                         <ListItem button className={classes.listItem}>
                             <ListItemIcon>
-                                <LockOpenRoundedIcon />
+                                <LockOpenRoundedIcon color="primary" />
                             </ListItemIcon>
                             <ListItemText>
-                                Sign Up
+                                Register
                             </ListItemText>
                         </ListItem>
                     </Link>
                     <Link to="/login" className={classes.link}>
                         <ListItem button className={classes.listItem}>
                             <ListItemIcon>
-                                <ExitToAppRoundedIcon />
+                                <ExitToAppRoundedIcon color="primary" />
                             </ListItemIcon>
                             <ListItemText>
                                 Login
@@ -93,17 +97,12 @@ export default function FooterCollapse() {
                     </Link>
                 </List>
             </Grid>
-            <Grid className={classes.grid} item xs={4}>
-                <Typography component="p" color="textSecondary">
-                    Thanks for visiting!
-                </Typography>
-            </Grid>
-            <Grid className={classes.grid} item xs={4}>
+            <Grid className={classes.grid} item xs={6}>
                 <List component="nav" aria-label="external resources">
                     <a href="https://linkedin.com/in/aarondguyett" target="_blank" rel="noopener noreferrer" className={classes.link}>
                         <ListItem button className={classes.listItem}>
                             <ListItemIcon>
-                                <LinkedInIcon />
+                                <LinkedInIcon color="primary" />
                             </ListItemIcon>
                             <ListItemText>
                                 LinkedIn
@@ -113,7 +112,7 @@ export default function FooterCollapse() {
                     <a href="https://github.com/guyett92" target="_blank" rel="noopener noreferrer" className={classes.link}>
                         <ListItem button className={classes.listItem}>
                             <ListItemIcon>
-                                <GitHubIcon />
+                                <GitHubIcon color="primary" />
                             </ListItemIcon>
                             <ListItemText>
                                 GitHub
@@ -123,7 +122,7 @@ export default function FooterCollapse() {
                     <a href="https://aarondguyett.com" target="_blank" rel="noopener noreferrer" className={classes.link}>
                         <ListItem button className={classes.listItem}>
                             <ListItemIcon>
-                                <WebIcon />
+                                <WebIcon color="primary" />
                             </ListItemIcon>
                             <ListItemText>
                                 Portfolio
@@ -133,7 +132,7 @@ export default function FooterCollapse() {
                     <a href="https://instagram.com/aarong_aesthetics" target="_blank" rel="noopener noreferrer" className={classes.link}>
                         <ListItem button className={classes.listItem}>
                             <ListItemIcon>
-                                <InstagramIcon />
+                                <InstagramIcon color="primary" />
                             </ListItemIcon>
                             <ListItemText>
                                 Instagram
@@ -143,7 +142,7 @@ export default function FooterCollapse() {
                     <a href="https://www.hackerrank.com/aaronguyett" target="_blank" rel="noopener noreferrer" className={classes.link}>
                         <ListItem button className={classes.listItem}>
                             <ListItemIcon>
-                                <ComputerIcon />
+                                <ComputerIcon color="primary" />
                             </ListItemIcon>
                             <ListItemText>
                                 HackerRank

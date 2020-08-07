@@ -15,7 +15,7 @@ Coming soon!
 * HTML
 * Javascript
 * JSON Web Token (JWT)
-* Node Packages: serve-favicon, morgan, mongoose, dotenv, bcrypt, react-router-dom, react-helmet
+* Node Packages: serve-favicon, morgan, mongoose, dotenv, bcrypt, react-router-dom, react-helmet, gridfs, multer, react-filepond
 ## APIs Integrated
 * [They Said So](https://quotes.rest) - Quotes API
 * Coming Soon!
@@ -41,6 +41,7 @@ Coming soon!
 * Mentors and task sharing
 * Integrate stats API
 * Integrate graphing API
+* Optimize code readability (eliminate redundancies)
 ## Some Stats
 * Most deletions in one day: 721
 * Most insertions in one day: 990

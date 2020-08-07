@@ -5,7 +5,8 @@ import {
     Link,
     Button,
     Grid,
-    Fab
+    Fab,
+    Tooltip
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import GoalCard from '../GoalCard/GoalCard';
@@ -34,10 +35,6 @@ const styles = theme => ({
 
 class Goals extends Component {
 
-    state = {
-        description: ''
-    }
-
     async componentDidMount() {
         const goals = await goalService.getGoals();
         this.props.handleUpdateGoals(goals);
@@ -58,10 +55,9 @@ class Goals extends Component {
         const goals = await goalService.deleteTask(tId, gId);
         this.props.handleUpdateGoals(goals);
     }
-// FIXME: Allow goal updates to description
+
     handleEditGoalDesc = async (id, desc) => {
-        this.setState({description: desc})
-        const goals = await goalService.editGoalDesc(id, this.state);
+        const goals = await goalService.editGoalDesc(id, desc);
         this.props.handleUpdateGoals(goals);
     }
 
@@ -114,9 +110,11 @@ class Goals extends Component {
                         </div>
                     </Container>
                 }
-                <Fab aria-label="add goal" className={this.props.classes.fab} color="primary" href="/addgoal">
-                    <AddIcon />
-                </Fab>
+                <Tooltip title='Add Goal'>
+                    <Fab aria-label="add goal" className={this.props.classes.fab} color="primary" href="/addgoal">
+                        <AddIcon />
+                    </Fab>
+                </Tooltip>
             </div>
         )
     }

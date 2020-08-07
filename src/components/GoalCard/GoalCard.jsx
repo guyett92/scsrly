@@ -17,13 +17,16 @@ import {
     ListItemSecondaryAction,
     IconButton,
     Link,
-    Input,
-    Snackbar
+    Snackbar,
+    TextField,
+    InputAdornment,
+    Tooltip
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import CloseIcon from '@material-ui/icons/Close';
+import KeyboardReturnRoundedIcon from '@material-ui/icons/KeyboardReturnRounded';
 
 const styles = theme => ({
     card: { maxWidth: 345, },
@@ -43,6 +46,9 @@ const styles = theme => ({
     link: {
         textDecoration: 'none !important',
     },
+    button: {
+        marginTop: '1rem',
+    },
 });
 
 
@@ -54,14 +60,27 @@ class GoalCard extends Component {
         editable: true,
         open: false,
         message: '',
-        description: this.props.description
-
+        description: this.props.description,
     };
 
-    handleEdit = id => {
+    async componentWillMount() {
+        this.taskCompletionUpdate();
+    }
+
+    taskCompletionUpdate() {
+        let incompleteCount = 0;
+        for (let i = 0; i < this.props.tasks.length; i++) {
+            if (!this.props.tasks[i].completed) {
+               incompleteCount += 1; 
+            }
+        }
+        return incompleteCount;
+    }
+
+    handleEdit = (e) => {
+        console.log('flipping');
         if (!this.state.editable) {
             this.setState({editable: true});
-            this.handleEditGoalDescClick(id);
         } else {
             this.setState({editable: false});
         }
@@ -91,8 +110,9 @@ class GoalCard extends Component {
         this.setState({openN: false});
     }
 
-    handleEditGoalDescClick = id => {
-        this.props.handleEditGoalDesc(id, this.state.desc);
+    handleEditGoalDescClick = (e) => {
+        e.preventDefault();
+        this.props.handleEditGoalDesc(this.props.goalId, this.state);
         console.log('Submitted!');
     }
 
@@ -123,8 +143,8 @@ class GoalCard extends Component {
                             <Typography gutterBottom variant="h5" component="h2">
                                 {this.props.name}
                             </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                <span><strong>{this.props.tasks.length} tasks to complete</strong></span>
+                            <Typography variant="body2" style={this.taskCompletionUpdate() > 0 ? {color : '#f44336'} : {color: 'green'}} component="p">
+                                <span><strong>{this.taskCompletionUpdate()} {!this.taskCompletionUpdate() ? 'tasks to complete. Great job!' : 'task(s) to complete.'}</strong></span>
                             </Typography>
                         </CardContent>
                     </CardActionArea>
@@ -209,27 +229,48 @@ class GoalCard extends Component {
                                 <Divider variant="fullWidth" />
                                 <ListItem ContainerComponent="div" className={this.props.classes.list}>
                                     <ListItemText>
-                                        <form>
-                                            <Input 
+                                        <form id="editDesc" onSubmit={this.handleEditGoalDescClick}>
+                                            <TextField 
                                                 type="text" 
                                                 disabled={this.state.editable} 
                                                 onChange={this.handleChange}
                                                 name="description" 
                                                 value={this.state.description}
-                                                component="p" 
-                                                variant="body1" 
-                                                style={this.state.editable ?
-                                                    {color: 'black'} : {color: '#970747'}
-                                                }
-                                                disableUnderline={this.state.editable ? true : false}
+                                                autoFocus
+                                                fullWidth
+                                                multiline
+                                                variant="outlined"
+                                                InputProps={{
+                                                    endAdornment:
+                                                     <InputAdornment 
+                                                        position="end" 
+                                                     >
+                                                         <Tooltip title="You must confirm edits to commit changes.">
+                                                            <IconButton
+                                                                aria-label="toggle edit"
+                                                                onClick={() => this.handleEdit()}
+                                                                color={this.state.editable ? 'primary' : 'secondary'}
+                                                                size="small"
+                                                            >
+                                                                <EditRoundedIcon />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    </InputAdornment>
+                                                }}
                                             />
+                                            <Button
+                                                className={this.props.classes.button} 
+                                                color="primary" 
+                                                disabled={this.state.editable} 
+                                                aria-label="edit goal description" 
+                                                variant="outlined"
+                                                endIcon={<KeyboardReturnRoundedIcon />}
+                                                type="submit"
+                                            >
+                                                Confirm Edit
+                                            </Button>
                                         </form>
                                     </ListItemText>
-                                    <ListItemSecondaryAction>
-                                        <IconButton edge="end" aria-label="edit goal description" size="small" onClick={() => this.handleEdit(this.props.goalId)}>
-                                            <EditRoundedIcon />
-                                        </IconButton>
-                                    </ListItemSecondaryAction>
                                 </ListItem>
                                 <Divider variant="fullWidth" />
                             </div>

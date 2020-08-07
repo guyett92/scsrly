@@ -13,12 +13,10 @@ module.exports = {
 };
 
 async function editDescription(req, res) {
+    // Remove extra data being sent in the future. Currently only able to work if entire state is sent.
     try {
-        console.log('yes');
         const goal = await Goal.findById(req.params.id);
-        console.log(goal);
-        console.log(req.body);
-        goal.description = req.body;
+        goal.description = req.body.description;
         await goal.save();
         getGoals(req, res);
     } catch (err) {

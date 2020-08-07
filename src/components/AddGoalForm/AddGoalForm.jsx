@@ -11,6 +11,8 @@ import {
     Fab,
     Snackbar,
     IconButton,
+    InputAdornment,
+    Tooltip,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -38,9 +40,6 @@ const styles = theme => ({
     },
     grid: {
         marginTop: theme.spacing(1),
-    },
-    task: {
-        width: '88%',
     },
     label: {
         marginLeft: '1rem',
@@ -173,25 +172,39 @@ class AddGoalForm extends Component {
                         {this.state.tasks.map((task, idx) => (
                             <div key={idx}>
                                 <TextField
-                                    className={this.props.classes.task}
+                                    fullWidth
                                     id="task"
                                     name="task"
                                     margin="normal"
                                     value={task.name}
                                     onChange={this.handleTaskNameChange(idx)}
+                                    autoFocus={this.state.tasks.length > 1}
+                                    InputProps={ idx !== 0 ? {
+                                        endAdornment: 
+                                            <InputAdornment position="end">
+                                                <Tooltip title="Remove task">
+                                                    <IconButton
+                                                        aria-label="remove task"
+                                                        onClick={this.handleRemoveTask(idx)}
+                                                        color="secondary"
+                                                        style={{border: '1px solid #ecba82', marginBottom: '0.4rem'}}
+                                                        size="small"
+                                                    >
+                                                        <RemoveIcon />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </InputAdornment>
+                                    } : {}}
                                 />
-                                {idx !== 0 &&
-                                <Fab size="small" color="secondary" aria-label="remove task" onClick={this.handleRemoveTask(idx)}>
-                                    <RemoveIcon />
-                                </Fab>
-                                }
                             </div>
                         ))}
                         {this.state.tasks[this.state.tasks.length - 1].name &&
                             <div>
-                                <Fab color="primary" aria-label="add task" onClick={this.handleAddTask}>
-                                    <AddIcon />
-                                </Fab>
+                                <Tooltip title="Add task">
+                                    <Fab color="primary" aria-label="add task" onClick={this.handleAddTask}>
+                                        <AddIcon />
+                                    </Fab>
+                                </Tooltip>
                                 {/* Can add text here if I want to label the button */}
                                 <label className={this.props.classes.label}><strong></strong></label>
                             </div>

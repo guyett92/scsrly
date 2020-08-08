@@ -7,6 +7,7 @@ import HomePage from '../HomePage/HomePage';
 import UserPage from '../UserPage/UserPage';
 import GoalsPage from '../GoalsPage/GoalsPage';
 import AddGoalPage from '../AddGoalPage/AddGoalPage';
+import ViewGoalsPage from '../ViewGoalsPage/ViewGoalsPage';
 import userService from '../../utils/userService';
 import { getQOD } from '../../utils/quote';
 import theme from '../theme';
@@ -45,12 +46,17 @@ export default class App extends Component {
     this.setState({ userGoals });
   }
 
+  handleUpdateUser = (user) => {
+    this.setState({user})
+  }
+
   async componentDidMount() {
     const quote = await getQOD('inspire');
     this.setState({
       quote: quote.contents.quotes[0].quote,
       quoteAuth: quote.contents.quotes[0].author,
     });
+    this.setState({user: userService.getUser()});
   }
 
   render() {
@@ -117,6 +123,7 @@ export default class App extends Component {
                   open={this.state.openSidebar}
                   onOpen={this.handleSidebarOpen}
                   onClose={this.handleSidebarClose}
+                  handleUpdateUser={this.handleUpdateUser}
                 />
                 :
                 <Redirect to='/login' />
@@ -151,6 +158,19 @@ export default class App extends Component {
                 />
               :
                 <Redirect to='/login' />
+            }/>
+            <Route exact path='/viewgoals' render={ (props) =>
+              <ViewGoalsPage 
+                history={props.history}
+                user={this.state.user}
+                handleLogout={this.handleLogout}
+                title={this.state.title}
+                quote={this.state.quote}
+                quoteAuth={this.state.quoteAuth}
+                open={this.state.openSidebar}
+                onOpen={this.handleSidebarOpen}
+                onClose={this.handleSidebarClose}
+              />
             }/>
           </Switch>
       </ThemeProvider>

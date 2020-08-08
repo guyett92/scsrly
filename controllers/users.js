@@ -5,7 +5,8 @@ const SECRET = process.env.SECRET;
 module.exports = {
     signup,
     login,
-    updateBio
+    updateBio,
+    getUser
 };
 
 /*-------- HELPER FUNCTIONS --------*/
@@ -13,13 +14,24 @@ function createJWT(user) {
     return jwt.sign({user}, SECRET, {expiresIn: '12h'});
 }
 
+async function getUser(req, res) {
+    try {
+        const user = await User.findById(req.params.id);
+        res.status(201).json(user);
+    } catch (err){
+        console.log(err);
+        res.status(400).json({message: "something went wrong"});
+    }
+}
+
+
 async function updateBio(req, res) {
     try {
         const user = await User.findById(req.params.id);
         console.log(req.body.bio);
         user.bio = req.body.bio;
         await user.save();
-        console.log(user);
+        getUser(req, res);
     } catch(err) {
         console.log(err);
         res.status(400).json({message: "something went wrong"});

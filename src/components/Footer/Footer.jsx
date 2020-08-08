@@ -14,8 +14,12 @@ export default function Footer() {
 
     const [checked, setChecked] = useState(false);
 
+    /* FIXME: Finish scroll to bottom on footer click */
+    // const [scrollPosition, setScrollPosition] = useState(0);
+
     const handleChange = () => {
         setChecked((prev) => !prev);
+        // setScrollPosition(())
     }
 
     return (

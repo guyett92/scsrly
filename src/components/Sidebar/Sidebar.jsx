@@ -18,6 +18,7 @@ import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded"
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import AssignmentTurnedInRoundedIcon from '@material-ui/icons/AssignmentTurnedInRounded';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
+import StreetviewRoundedIcon from '@material-ui/icons/StreetviewRounded';
 import SearchIcon from '@material-ui/icons/Search';
 import MeetingRoomRoundedIcon from '@material-ui/icons/MeetingRoomRounded';
 import './Sidebar.css';
@@ -146,7 +147,7 @@ class Sidebar extends Component {
                 <AssignmentTurnedInRoundedIcon />
               </ListItemIcon>
               <ListItemText>
-                Goals
+                {user.firstName}'s Goals
               </ListItemText>
             </ListItem>
           </Link>
@@ -157,6 +158,16 @@ class Sidebar extends Component {
               </ListItemIcon>
               <ListItemText>
                 Add a Goal
+              </ListItemText>
+            </ListItem>
+          </Link>
+          <Link to="/viewgoals" className="login">
+            <ListItem button key="View Goals" aria-label="view all goals">
+              <ListItemIcon>
+                <StreetviewRoundedIcon />
+              </ListItemIcon>
+              <ListItemText>
+                View Goals
               </ListItemText>
             </ListItem>
           </Link>

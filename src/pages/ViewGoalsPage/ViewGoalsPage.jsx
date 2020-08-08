@@ -1,10 +1,10 @@
 import React from 'react';
 import Layout from '../../components/Layout/Layout';
-import UserHead from '../../components/UserHead/UserHead';
 import {
     Container, 
     CssBaseline,
-
+    Typography,
+    
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -22,14 +22,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const UserPage = (props) => {
+const ViewGoalsPage = (props) => {
 
     const classes = useStyles();
 
     return (
             <Layout
             title={props.title}
-            pageTitle={props.user.firstName + " " + props.user.lastName}
+            pageTitle={"View Goals"}
             keywords="aaron, guyett, scsr, success"
             description="Your user page serves you with the controls you need to be successful."
             user={props.user}
@@ -43,14 +43,11 @@ const UserPage = (props) => {
                 <Container>
                     <CssBaseline />
                     <div className={classes.paper}>
-                        <UserHead 
-                            user={props.user}
-                            handleUpdateUser={props.handleUpdateUser}
-                        />
+                        <Typography component="h1" variant="h1">Coming soon!</Typography>
                     </div>
                 </Container>
             </Layout>
     )
 }
 
-export default UserPage;
+export default ViewGoalsPage;

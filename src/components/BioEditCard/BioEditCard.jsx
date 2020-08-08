@@ -15,11 +15,13 @@ class BioEditCard extends Component {
         user: this.props.user
     }
 
+
     handleUpdateBio = async (e) => {
         e.preventDefault();
         this.props.handleEdit();
         try {
-            await userService.updateBio(this.state.user._id, this.state);
+            const user = await userService.updateBio(this.props.user._id, this.state);
+            this.props.handleUpdateUser(user);
         } catch (err) {
             console.log(err);
         }

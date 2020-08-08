@@ -63,12 +63,12 @@ class AddGoalForm extends Component {
         goalDate: `${new Date().toISOString().split('T')[0]}`,
         tasks: [{name: ""}],
         files: [
-            {
-                source: "index.html",
-                options:{
-                    type: "local"
-                }
-            }
+            // {
+            //     source: "index.html",
+            //     options:{
+            //         type: "local"
+            //     }
+            // }
         ]
     };
 

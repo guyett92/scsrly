@@ -65,7 +65,7 @@ export default function FooterCollapse() {
                             </ListItemText>
                         </ListItem>
                     </Link>
-                    <Link to="/sharedgoals" className={classes.link}>
+                    <Link to="/viewgoals" className={classes.link}>
                         <ListItem button className={classes.listItem}>
                             <ListItemIcon>
                                 <StreetviewRoundedIcon color="primary" />

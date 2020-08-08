@@ -54,8 +54,8 @@ class Navbar extends Component {
                   <Button onClick={this.props.handleLogout} className="login white" style={{marginLeft: "1.25rem"}}aria-label="login">LOG OUT</Button>
                   <Link to="/user">
                     <IconButton>
-                      {this.props.user.avatarUrl ?
-                        <Avatar alt={this.props.user.name} src={this.props.user.avatarUrl} />
+                      {this.props.user.avatarURL ?
+                        <Avatar alt={this.props.user.firstName} src={this.props.user.avatarURL} />
                       :
                         <AccountCircleRoundedIcon style={{color: 'white'}}/>
                       }

@@ -147,7 +147,7 @@ class Sidebar extends Component {
                 <AssignmentTurnedInRoundedIcon />
               </ListItemIcon>
               <ListItemText>
-                {user.firstName}'s Goals
+                {user && user.firstName + "'s "}Goals
               </ListItemText>
             </ListItem>
           </Link>

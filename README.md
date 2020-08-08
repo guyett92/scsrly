@@ -1,9 +1,10 @@
-# Scsr.ly v0.71
+# Scsr.ly v0.75
 [Scsr.ly](https://scsrly.herokuapp.com/) is a social media app that utilizes the MERN stack and is hosted on Heroku.
 ## Features
 Users can create an account to share their goals with others. A goal is broken down into tasks and users can give kudos to others when a task is completed or shared. The application helps track goals and utilizes an API to display motivational quotes while connecting others with like-minded people.
-## Images
-Coming soon!
+## Very High Quality Images
+![Home](./public/img/Home.png)
+![Goals](./public/img/Goals.png)
 ## Getting Started
 * Sign Up at [Scsr.ly](https://scsrly.herokuapp.com/)
 ## Technologies Used
@@ -46,3 +47,4 @@ Coming soon!
 ## Some Stats
 * Most deletions in one day: 721
 * Most insertions in one day: 990
+* Most tired: Me

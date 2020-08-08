@@ -18,7 +18,8 @@ const userSchema = new mongoose.Schema({
         default: []
     }],
     bio: {
-        type: String
+        type: String,
+        default: ''
     },
     avatarURL: String,
     newsletter: {

@@ -16,7 +16,6 @@ export default function Footer() {
 
     const handleChange = () => {
         setChecked((prev) => !prev);
-
     }
 
     return (
